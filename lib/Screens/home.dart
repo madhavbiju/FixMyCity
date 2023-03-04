@@ -138,6 +138,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _submitIssue,
+        label: const Text('Submit'),
+        icon: const Icon(Icons.save),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -174,18 +179,29 @@ class _HomePageState extends State<HomePage> {
               }).toList(),
             ),
             SizedBox(height: 20),
-            _photoUrl != null
-                ? Image.file(File(_photoUrl!))
-                : ElevatedButton(
-                    onPressed: _takePhoto,
-                    child: Text('Take a Photo'),
-                  ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _submitIssue,
-              child: Text('Submit'),
+            Container(
+              decoration: _photoUrl != null
+                  ? BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    )
+                  : null,
+              padding: EdgeInsets.all(8.0),
+              child: _photoUrl != null
+                  ? Image.file(
+                      File(_photoUrl!),
+                      width: 150.0,
+                      height: 150.0,
+                      fit: BoxFit.cover,
+                    )
+                  : ElevatedButton(
+                      onPressed: _takePhoto,
+                      child: Text('Take a Photo'),
+                    ),
             ),
-            SizedBox(height: 20),
           ],
         ),
       ),
