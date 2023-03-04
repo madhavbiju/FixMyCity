@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   Position? _currentPosition;
   String? _photoUrl;
   String? _issueType;
+  String? _otherIssueType;
 
   @override
   void initState() {
@@ -159,25 +160,64 @@ class _HomePageState extends State<HomePage> {
                   )
                 : CircularProgressIndicator(),
             SizedBox(height: 20),
-            DropdownButton<String>(
-              value: _issueType,
-              hint: Text('Select an issue type'),
-              onChanged: (String? value) {
-                setState(() {
-                  _issueType = value;
-                });
-              },
-              items: <String>[
-                'Pothole',
-                'Streetlight Outage',
-                'Garbage Collection',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
+            Padding(
+  padding: EdgeInsets.fromLTRB(50.0,16.0,50.0,16.0),
+  child: DropdownButtonFormField<String>(
+    value: _issueType,
+    hint: Text('Select an issue type'),
+    onChanged: (String? value) {
+      setState(() {
+        _issueType = value!;
+      });
+    },
+    items: <String>[
+      'Pothole',
+      'Streetlight Outage',
+      'Garbage Collection',
+      'Other',
+    ].map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList(),
+    decoration: InputDecoration(
+      border: OutlineInputBorder(),
+    ),
+    onSaved: (String? value) {
+      setState(() {
+        _issueType = value!;
+      });
+    },
+  ),
+),
+
+      if (_issueType == 'Other')
+      Padding(
+        padding: const EdgeInsets.fromLTRB(50.0,16.0,50.0,16.0),
+        child: TextFormField(
+        decoration: InputDecoration(
+        labelText: 'Enter Other Issue Type',
+        border: OutlineInputBorder(),
+        ),
+        onChanged: (value) {
+        setState(() {
+          _otherIssueType = value;
+        });
+          },
+          validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter an issue type';
+        }
+        return null;
+          },
+          onSaved: (value) {
+        setState(() {
+          _otherIssueType = value;
+        });
+          },
+        ),
+      ),
             SizedBox(height: 20),
             Container(
               decoration: _photoUrl != null
