@@ -9,16 +9,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   static final _defaultLightColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+      ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
   static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue, brightness: Brightness.dark);
+      primarySwatch: Colors.deepPurple, brightness: Brightness.dark);
 
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
-        title: 'Classes to Attend',
+        title: 'FixMyCity',
         theme: ThemeData(
           colorScheme: lightColorScheme ?? _defaultLightColorScheme,
           useMaterial3: true,
