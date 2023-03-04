@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271478412130",
+    "project_id": "fixmycity-aroha",
+    "storage_bucket": "fixmycity-aroha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271478412130:android:da7035530263b6a7db923b",
+        "android_client_info": {
+          "package_name": "com.aroha.fixmycity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271478412130-b8sb4a02rjs0atc8g547f538htt5mn04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjuxaKKVZa7NG7ZYsJoDYqsM07UOeJNTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271478412130-b8sb4a02rjs0atc8g547f538htt5mn04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

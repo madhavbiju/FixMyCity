@@ -38,6 +38,10 @@ dependencies:
   dynamic_color: ^1.6.2
   location: ^4.4.0
   geolocator: ^9.0.2
+  cloud_firestore: ^4.4.3
+  firebase_auth: ^4.2.9
+  shared_preferences: ^2.0.18
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:
