@@ -96,7 +96,7 @@ class _MapPageState extends State<MapPage> {
                     .map((coord) => Marker(
                           point: coord,
                           builder: (BuildContext context) {
-                            return Icon(Icons.location_on);
+                            return Icon(Icons.location_on, color: Colors.black);
                           },
                         ))
                     .toList(),

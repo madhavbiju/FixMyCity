@@ -112,13 +112,11 @@ class _HomePageState extends State<HomePage> {
 
           if (key.currentState!.validate()) {
             String issue = issueController.text;
-            String location = _currentPosition.toString();
             double latitude = _currentPosition!.latitude;
             double longitude = _currentPosition!.longitude;
 
             Map<String, dynamic> dataToSend = {
               'issue': issue,
-              'location': location,
               'image': imageUrl,
               'latitude': latitude,
               'longitude': longitude
