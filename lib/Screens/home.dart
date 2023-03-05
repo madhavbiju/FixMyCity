@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:fixmycity/Screens/map.dart';
 import 'package:fixmycity/Screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import '../Functions/bottomnav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -73,6 +76,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(selectedIndex: 0),
       appBar: AppBar(
         elevation: 4,
         centerTitle: true,
@@ -109,11 +113,15 @@ class _HomePageState extends State<HomePage> {
           if (key.currentState!.validate()) {
             String issue = issueController.text;
             String location = _currentPosition.toString();
+            double latitude = _currentPosition!.latitude;
+            double longitude = _currentPosition!.longitude;
 
-            Map<String, String> dataToSend = {
+            Map<String, dynamic> dataToSend = {
               'issue': issue,
               'location': location,
               'image': imageUrl,
+              'latitude': latitude,
+              'longitude': longitude
             };
             _reference.add(dataToSend);
           }
