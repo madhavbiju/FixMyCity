@@ -70,6 +70,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                           value: issueController.text.isNotEmpty
                               ? issueController.text
                               : null,
+                          hint: Text('Select an issue type'),
                           items: dropdownItems.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -181,34 +184,65 @@ class _HomePageState extends State<HomePage> {
                           ))
                     else
                       Container(),
-                    ElevatedButton(
-                      child: Text('Take a Photo'),
-                      onPressed: () async {
-                        ImagePicker imagePicker = ImagePicker();
-                        XFile? file = await imagePicker.pickImage(
-                            source: ImageSource.camera);
-                        print('${file?.path}');
-
-                        if (file == null) return;
-                        //Import dart:core
-                        String uniqueFileName =
-                            DateTime.now().millisecondsSinceEpoch.toString();
-                        Reference referenceRoot =
-                            FirebaseStorage.instance.ref();
-                        Reference referenceDirImages =
-                            referenceRoot.child('images');
-
-                        Reference referenceImageToUpload =
-                            referenceDirImages.child('name');
-
-                        try {
-                          await referenceImageToUpload
-                              .putFile(File(file!.path));
-                          imageUrl =
-                              await referenceImageToUpload.getDownloadURL();
-                        } catch (error) {}
-                      },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        child: Text('Take a Photo'),
+                        onPressed: () async {
+                          ImagePicker imagePicker = ImagePicker();
+                          XFile? file = await imagePicker.pickImage(
+                              source: ImageSource.camera);
+                          print('${file?.path}');
+                    
+                          if (file == null) return;
+                          //Import dart:core
+                          String uniqueFileName =
+                              DateTime.now().millisecondsSinceEpoch.toString();
+                          Reference referenceRoot =
+                              FirebaseStorage.instance.ref();
+                          Reference referenceDirImages =
+                              referenceRoot.child('images');
+                    
+                          Reference referenceImageToUpload =
+                              referenceDirImages.child('name');
+                    
+                          try {
+                            await referenceImageToUpload
+                                .putFile(File(file.path));
+                            imageUrl =
+                                await referenceImageToUpload.getDownloadURL();
+                          } catch (error) {}
+                        },
+                      ),
                     ),
+                    ElevatedButton(
+                       child: Text('Upload a Photo'),
+                      onPressed: () async{
+                        ImagePicker imagePicker = ImagePicker();
+                          XFile? file = await imagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          print('${file?.path}');
+                    
+                          if (file == null) return;
+                          //Import dart:core
+                          String uniqueFileName =
+                              DateTime.now().millisecondsSinceEpoch.toString();
+                          Reference referenceRoot =
+                              FirebaseStorage.instance.ref();
+                          Reference referenceDirImages =
+                              referenceRoot.child('images');
+                    
+                          Reference referenceImageToUpload =
+                              referenceDirImages.child('name');
+                    
+                          try {
+                            await referenceImageToUpload
+                                .putFile(File(file.path));
+                            imageUrl =
+                                await referenceImageToUpload.getDownloadURL();
+                          } catch (error) {}
+                      },
+                    )
                   ],
                 ),
               ),
