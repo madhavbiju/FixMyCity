@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final issueController = TextEditingController();
   Position? _currentPosition;
   final textController = TextEditingController();
-
+File? _imageFile;
   String dropdownValue = 'Pothole';
   bool showOtherTextField = false;
 
@@ -186,7 +186,14 @@ class _HomePageState extends State<HomePage> {
                       Container(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
+                      child: _imageFile != null
+                  ? Image.file(
+                      _imageFile!,
+                      width: 150.0,
+                      height: 150.0,
+                      fit: BoxFit.cover,
+                    )
+                  : ElevatedButton(
                         child: Text('Take a Photo'),
                         onPressed: () async {
                           ImagePicker imagePicker = ImagePicker();
@@ -194,6 +201,11 @@ class _HomePageState extends State<HomePage> {
                               source: ImageSource.camera);
                           print('${file?.path}');
                     
+                          if (file == null) return;
+                          setState(() {
+                            _imageFile = File(file.path);
+                          });
+
                           if (file == null) return;
                           //Import dart:core
                           String uniqueFileName =
@@ -215,13 +227,20 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    ElevatedButton(
+                  Visibility(
+  visible: _imageFile == null,
+  child: ElevatedButton( 
                        child: Text('Upload a Photo'),
                       onPressed: () async{
                         ImagePicker imagePicker = ImagePicker();
                           XFile? file = await imagePicker.pickImage(
                               source: ImageSource.gallery);
                           print('${file?.path}');
+
+                          if (file == null) return;
+                          setState(() {
+                            _imageFile = File(file.path);
+                          });
                     
                           if (file == null) return;
                           //Import dart:core
@@ -242,7 +261,8 @@ class _HomePageState extends State<HomePage> {
                                 await referenceImageToUpload.getDownloadURL();
                           } catch (error) {}
                       },
-                    )
+                    ),
+                    ),
                   ],
                 ),
               ),
